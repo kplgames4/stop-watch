@@ -1,0 +1,98 @@
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+public class StopWatchView extends JFrame {
+
+	public JButton startBtn = new JButton("start");
+	public JButton stopBtn = new JButton("stop");
+	public JButton resetBtn = new JButton("reset");
+	public JTextField hourTextBox = new JTextField(2);
+	public JTextField minTextBox = new JTextField(2);
+	public JTextField secTextBox = new JTextField(2);
+	public JTextField millSecTextBox = new JTextField(2);
+	
+	
+	public StopWatchView()
+	{
+		JPanel watchPanel = new JPanel();
+		
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setSize(500,100);
+		
+		watchPanel.add(hourTextBox);
+		watchPanel.add(minTextBox);
+		watchPanel.add(secTextBox);
+		watchPanel.add(millSecTextBox);
+		watchPanel.add(startBtn);
+		watchPanel.add(resetBtn);
+		watchPanel.add(stopBtn);
+		
+		this.add(watchPanel);   
+		
+	}
+	
+	public int getHour()
+	{
+		return Integer.parseInt(hourTextBox.getText());
+	}
+	
+	public int getMin()
+	{
+		return Integer.parseInt(minTextBox.getText());
+	}
+	
+	public int getSec()
+	{
+		return Integer.parseInt(secTextBox.getText());
+	}
+	
+	public int getMillSec()
+	{
+		return Integer.parseInt(millSecTextBox.getText());
+	}
+	
+	public void setHour(int theHour)
+	{
+		hourTextBox.setText(Integer.toString(theHour));
+	}
+	
+	public void setMin(int theMin)
+	{
+		minTextBox.setText(Integer.toString(theMin));
+	}
+	
+	public void setSec(int theSec)
+	{
+		secTextBox.setText(Integer.toString(theSec));
+	}
+	
+	public void setMill(int theMill)
+	{
+		millSecTextBox.setText(Integer.toString(theMill));
+	}
+	
+	public void addStartListener(ActionListener listenForStartBtn)
+	{
+		startBtn.addActionListener(listenForStartBtn);
+	}
+	
+	public void addStopListener(ActionListener listenForStopBtn)
+	{
+		stopBtn.addActionListener(listenForStopBtn);
+	}
+	
+	public void addResetListener(ActionListener listenForResetBtn)
+	{
+		resetBtn.addActionListener(listenForResetBtn);
+	}
+	
+	public void displayErrorMessage(String errorMessage)
+	{
+		JOptionPane.showMessageDialog(this, errorMessage);
+	}
+}

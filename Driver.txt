@@ -1,0 +1,24 @@
+
+public class Driver {
+
+	public static  void main(String[] args)
+	{
+		StopWatchView view = new StopWatchView();
+		StopWatchModel model = new StopWatchModel();
+		StopWatchController controller = new StopWatchController(model,view);
+		
+		model.setSec(59);
+		model.setMin(59);
+		model.setMillSec(0);
+		model.setHour(0);
+		
+		view.setSec(model.getSec());
+		view.setMin(model.getMin());
+		view.setMill(model.getMill());
+		view.setHour(model.getHour());
+		
+		int count = 0;
+		
+		view.setVisible(true);
+	}
+}

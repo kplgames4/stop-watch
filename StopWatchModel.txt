@@ -1,0 +1,60 @@
+
+public class StopWatchModel {
+	public int hour;
+	public int min;
+	public int sec;
+	public int millSec;
+	
+	public StopWatchModel(int theHour, int theMin, int theSec, int theMill)
+	{
+		hour = theHour;
+		min = theMin;
+		sec = theSec;
+		millSec = theMill;
+	}
+	
+	public StopWatchModel()
+	{
+		
+	}
+	
+	public int getHour()
+	{
+		return hour;
+	}
+	
+	public int getMin()
+	{
+		return min;
+	}
+	
+	public int getSec()
+	{
+		return sec;
+	}
+	
+	public int getMill(){
+		return millSec;
+	}
+	
+	public void setHour(int theHour)
+	{
+		hour = theHour;
+	}
+	
+	public void setMin(int theMin)
+	{
+		min = theMin;
+	}
+	
+	public void setSec(int theSec)
+	{
+		sec = theSec;
+	}
+	
+	public void setMillSec(int theMill)
+	{
+		millSec = theMill;
+	}
+	
+}

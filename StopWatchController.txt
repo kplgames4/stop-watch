@@ -1,0 +1,135 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+//import java.util.Timer;
+import javax.swing.Timer;
+
+public class StopWatchController {
+
+	public StopWatchModel model;
+	public StopWatchView view;
+	public int hour;
+	public int min;
+	public int sec;
+	public int millSec;
+	public int count;
+	public Timer timer;
+	public int speed = 10;
+	
+	public StopWatchController(StopWatchModel model, StopWatchView view)
+	{
+		this.model = model;
+		this.view = view;
+		this.view.addStartListener(new CountListener());
+		this.view.addStopListener(new StopListener());
+		this.view.addResetListener(new ResetListener());
+		
+		hour = 00;
+		min= 00;
+		sec = 00;
+		millSec = 00;
+		count = 00;
+		
+		view.setHour(hour);
+		view.setMin(min);
+		view.setSec(sec);
+		view.setMill(millSec);
+		
+		timer = new Timer(speed, new CountListener());
+	}
+	
+	public void addToHours()
+	{
+		this.hour++;
+	}
+	
+	public void addToMin()
+	{
+		this.min++;
+	}
+	
+	public void addToSec()
+	{
+		this.sec++;
+	}
+	
+	public void addToMill()
+	{
+		this.millSec++;
+	}
+	
+	public void countUp()
+	{
+		view.setMill(millSec);
+	}
+	
+	
+	class CountListener implements ActionListener
+	{
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			// TODO Auto-generated method stub
+			timer.start();
+			model.millSec++;
+			view.setMill(model.getMill());
+			
+			if(model.millSec >=99)
+			{
+				model.sec++;
+				view.setSec(model.getSec());
+				model.millSec = 0;
+			}
+			
+			if(model.sec >59)
+			{
+				model.min++;
+				view.setMin(model.getMin());
+				model.sec = 0;
+			}
+			
+			if(model.min > 59)
+			{
+				model.hour++;
+				view.setHour(model.getHour());
+				model.min = 0;
+			}
+			
+			if(model.hour >=99)
+			{
+				timer.stop();
+			}
+		}
+		
+	}
+	
+	class StopListener implements ActionListener
+	{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			timer.stop();
+		}
+		
+	}
+	
+	class ResetListener implements ActionListener
+	{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			model.hour = 0;
+			model.min = 0;
+			model.sec = 0;
+			model.millSec = 0;
+			
+			view.hourTextBox.setText(Integer.toString(model.hour));
+			view.minTextBox.setText(Integer.toString(model.min));
+			view.secTextBox.setText(Integer.toString(model.sec));
+			view.millSecTextBox.setText(Integer.toString(model.millSec));
+		}
+		
+	}
+	
+}
